@@ -1,0 +1,21 @@
+<body>
+	<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+	<% end %>
+	<h1>Editing Book</h1>
+	<%=form_for(@booker) do |f| %>
+	<div class="field">
+		<p>Title</p>
+	<%= f.text_field :title, class: "book_title" %>
+	</div>
+	<div class="field">
+		<p>Body</p>
+	<%= f.text_area :body, class: "book_body" %>
+	</div>
+	<div class="action">
+	<%= f.submit "Update Book" %>
+	</div>
+	<%= link_to "Show", booker_path(@booker), class: "show_#{@booker.id}" %> |
+	<%= link_to "Back", bookers_path(@booker),class: "back" %>
+	<% end %>
+</body>

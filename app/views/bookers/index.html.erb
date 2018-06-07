@@ -1,0 +1,54 @@
+<body>
+	<% if flash[:notice] %>
+	<p id="notice"><%= flash[:notice] %></p>
+	<% end %>
+<h1>Books</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th colspan="3"></th>
+		</tr>
+	</thead>
+	<tbody>
+
+<% @bookers.each do |booker| %>
+
+	<tr>
+		<td><%= booker.title %></td>
+		<td><%= booker.body %></td>
+		<td>
+			<%= link_to "Show", booker_path(booker), class: "show_#{booker.id}" %>
+		</td>
+		<td>
+			<%= link_to "Edit", edit_booker_path(booker), class: "edit_#{booker.id}" %>
+		</td>
+		<td>
+			<%= link_to "Destroy", booker_path(booker),class: "destroy_#{booker.id}", method: :delete, data: {confirm: "Are you sure?"} %>
+		</td>
+	</tr>
+<% end %>
+	</tbody>
+
+</table>
+
+<h2>New book</h2>
+<%= form_for(@booker) do |f| %>
+
+<div class="field">
+<p>Title</p>
+<%= f.text_field :title, class: "book_title" %>
+</div>
+<div class="field">
+<p>Body</p>
+<%= f.text_area :body,class: "book_body" %>
+</div>
+<div class="action">
+<%= f.submit 'Create Book'  %>
+</div>
+
+
+
+<% end %>
+</body>
