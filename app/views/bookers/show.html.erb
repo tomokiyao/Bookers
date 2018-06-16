@@ -1,0 +1,15 @@
+<body>
+	<% if flash[:notice] %>
+	<p id="notice"><%= flash[:notice] %></p>
+	<% end %>
+	<p class="show">
+		<strong>Title:</strong>
+		<%= @booker.title %>
+	</p>
+	<p class="show">
+		<strong>Body:</strong>
+		<%= @booker.body %>
+	</p>
+	<%= link_to "Edit", edit_booker_path(@booker), class: "edit_#{@booker.id}" %> |
+	<%= link_to "Back", bookers_path(@booker), class: "back" %>
+</body>
