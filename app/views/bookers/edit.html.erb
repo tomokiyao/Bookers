@@ -3,6 +3,15 @@
 	<p><%= flash[:notice] %></p>
 	<% end %>
 	<h1>Editing Book</h1>
+	<% if @booker.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @booker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 	<%=form_for(@booker) do |f| %>
 	<div class="field">
 		<p>Title</p>

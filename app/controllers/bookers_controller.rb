@@ -3,7 +3,6 @@ class BookersController < ApplicationController
   def index
   	@bookers = Booker.all
   	@booker = Booker.new
-  	@bookers = Booker.order("created_at asc")
   end
 
   def show
@@ -17,12 +16,13 @@ class BookersController < ApplicationController
   def create
   	booker = Booker.new(booker_params)
   	if booker.save
-  	redirect_to booker_path(booker)
-  	flash[:notice] = "Book was successfully created."
+  	 redirect_to booker_path(booker)
+  	 flash[:notice] = "Book was successfully created."
   	else
-  	render action: :new
-
-  end
+      @bookers = Booker.all
+      @booker = booker
+      render :index
+    end
   end
 
   def edit
@@ -31,11 +31,13 @@ class BookersController < ApplicationController
 
   def update
   	booker = Booker.find(params[:id])
+    # binding.pry
   	if booker.update(booker_params)
-  	redirect_to booker_path(booker)
-  	flash[:notice] = "Book was successfully updated."
+  	 redirect_to booker_path(booker)
+  	 flash[:notice] = "Book was successfully updated."
   else
-  	render action: :new
+  	 @booker = booker
+     render :edit
   end
   end
 
